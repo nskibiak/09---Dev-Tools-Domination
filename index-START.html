@@ -1,46 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Console Tricks!</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Console Tricks!</title>
+  </head>
+  <body>
+    <p onClick="makeGreen()">×BREAK×DOWN×</p>
 
-  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+    <script>
+      const dogs = [
+        { name: 'Snickers', age: 2 },
+        { name: 'hugo', age: 8 },
+      ];
 
-  <script>
-    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+      function makeGreen() {
+        const p = document.querySelector('p');
+        p.style.color = '#BADA55';
+        p.style.fontSize = '50px';
+      }
 
-    function makeGreen() {
+      // Regular
+      console.log('hello');
+
+      // Interpolated
+      console.log('hello, i am a %s string', 'poop');
+
+      // Styled
+      console.log('%c hello, i am some great text', 'font-size: 20px');
+
+      // warning!
+      console.warn('this is a warning');
+
+      // Error :|
+      console.error('this is a error');
+
+      // Info
+      console.info('Crocodiles eat 3-4 people per year');
+
+      // Testing
+      console.assert(1 === 2, 'your math is wrong!');
+
+      // clearing
+      console.clear();
+
+      // Viewing DOM Elements
       const p = document.querySelector('p');
-      p.style.color = '#BADA55';
-      p.style.fontSize = '50px';
-    }
+      console.dir(p);
 
-    // Regular
+      // Grouping together
+      console.clear();
+      dogs.map((dog) => {
+        console.groupCollapsed(`${dog.name}`);
+        console.log(`${dog.name} is ${dog.age} years old.`);
+        console.log(`${dog.name} is ${dog.age * 7} old in dog years.`);
+        console.groupEnd(`${dog.name}`);
+      });
 
-    // Interpolated
+      // counting
+      console.count('Nick');
+      console.count('Nick');
+      console.count('Nick');
+      console.count('Nick');
+      console.count('Steve');
 
-    // Styled
+      // timing
+      console.time('fetching time');
+      fetch('https://api.github.com/users/wesbos')
+        .then((data) => data.json())
+        .then((data) => {
+          console.timeEnd('fetching time');
+          console.log(data);
+        });
 
-    // warning!
-
-    // Error :|
-
-    // Info
-
-    // Testing
-
-    // clearing
-
-    // Viewing DOM Elements
-
-    // Grouping together
-
-    // counting
-
-    // timing
-
-  </script>
-</body>
+      // table
+      console.table(dogs);
+    </script>
+  </body>
 </html>
